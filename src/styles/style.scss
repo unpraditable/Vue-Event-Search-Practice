@@ -1,7 +1,7 @@
 $green : #42b983;
 $text-color: #222222;
 $purple : rgb(42, 9, 46);
-$blue: #ffde00;
+$yellow: #ffde00;
 $orange: rgb(238, 138, 48);
 $gray : #f5f5f5;
 
@@ -15,6 +15,7 @@ $gray : #f5f5f5;
 
 body {
     background-color: $gray;
+    margin: 0;
 }
 
 #nav {
@@ -22,12 +23,12 @@ body {
 
     a {
         font-weight: bold;
-        color: $blue;
+        color: $yellow;
     }
 }
 
 .nav-header {
-    background-color: $blue;
+    background-color: $yellow;
     width: 100%;
     padding: 10px 0;
 
@@ -41,23 +42,24 @@ body {
     }
 
     .search-box {
+        font-size: 14px;
         padding: 5px 0;
         width: 100%;
         background: transparent;
         border: none;
-        border-bottom: solid 1px white;
-        color: white;
+        border-bottom: solid 1px $text-color;
+        color: $text-color;
 
         &::placeholder {
             /* Chrome, Firefox, Opera, Safari 10.1+ */
-            color: white;
+            color: $text-color;
             opacity: 1;
             /* Firefox */
         }
 
         :-ms-input-placeholder {
             /* Internet Explorer 10-11 */
-            color: white;
+            color: $text-color;
         }
     }
 }
@@ -108,7 +110,12 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 20px;
-
+    @media only screen and (max-width: 768px){
+        grid-template-columns: 1fr 1fr;
+    } 
+    @media only screen and (max-width: 400px) {
+        grid-template-columns: 1fr;
+    }
     li {
         box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.1);
         background: white;
@@ -131,23 +138,46 @@ body {
             }
         }
 
-        .exhibitor-name {
-            h3 {
-                font-size: 18px;
-                margin: 0;
-                margin-bottom: 10px;
-            }
+        
+    }
+    .exhibitor-name {
+        height: 52px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        h3 {
+            font-size: 18px;
         }
     }
     .exhibitor-body {
+        display: flex;
+        align-items: center;
         .exhibitor-booth {
             color: black;
             padding: 5px 10px;
-            background: $blue;
+            background: $yellow;
             margin: 0;
             text-decoration: none;
             font-size: 14px;
             border-radius: 4px;
+            &.no-booth{
+                background: $gray;
+            }
+        }
+        .bookmark, .bookmarked{
+            margin-left: auto;
+            cursor: pointer;
+            .bookmark-icon{
+                background: url(/icons/bookmark.svg);
+                background-repeat: no-repeat;
+                width: 20px;
+                height: 20px;
+                background-size: contain;
+                content: "";
+            }
+        }
+        .bookmarked{
+            margin-left: auto;
         }
     }
 }

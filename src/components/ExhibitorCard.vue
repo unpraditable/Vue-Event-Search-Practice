@@ -10,7 +10,17 @@
                 <h3>{{exhibitor.company_name}}</h3>
             </div>
             <div class="exhibitor-body">
-                <a class="exhibitor-booth" href="#">{{exhibitor.booth}}</a>
+                <a v-if="exhibitor.booth" class="exhibitor-booth" href="#">{{exhibitor.booth}}</a>
+                <a v-if="!exhibitor.booth" class="exhibitor-booth no-booth" href="#">No Booth</a>
+
+                <a v-if="exhibitor.bookmark !=0" class="bookmarked">
+                    <span class="icon bookmark-icon active"></span>
+                    Bookmarked
+                </a>
+                <a v-if="exhibitor.bookmark ===0" class="bookmark">
+                    <span class="icon bookmark-icon"></span>
+                    Bookmark
+                </a>
             </div>
         </li>
     </ul>

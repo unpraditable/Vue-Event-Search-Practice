@@ -7,7 +7,7 @@
     </header>
     <div class="content">
       <div class="container">
-          <ExhibitorCard v-if="!search" :exhibitors="filteredExhibitors" />
+          <ExhibitorCard v-if="!search" :exhibitors="exhibitors" />
 
           <ExhibitorCard v-if="search" :exhibitors="filteredExhibitorsBySearch" />
       </div>
@@ -38,7 +38,6 @@
 
     //Fetch exhibitors with axios
     created() {
-
       axios.get(apiUrl)
         .then(response => {
           // JSON responses are automatically parsed.
@@ -50,6 +49,7 @@
       
     },
     computed: {
+      // a function to return a search result exhibitor by real time
       filteredExhibitorsBySearch() {
         return this.exhibitors
           .filter(exhibitor =>
