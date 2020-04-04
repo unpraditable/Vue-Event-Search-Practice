@@ -1,18 +1,15 @@
 <template>
   <div class="home">
-    <header>
+    <header class="nav-header">
       <div class="container">
-        <div class="row search-row">
-          <div class="col-12">
-            <input class="search-box" type="text" v-model="search" placeholder="Search Exhibitor..." />
-
-          </div>
-        </div>
+          <input class="search-box" type="text" v-model="search" placeholder="Search Exhibitor..." />
       </div>
     </header>
     <div class="content">
       <div class="container">
-          <ExhibitorCard :exhibitors="filteredExhibitorsBySearch" />
+          <ExhibitorCard v-if="!search" :exhibitors="filteredExhibitors" />
+
+          <ExhibitorCard v-if="search" :exhibitors="filteredExhibitorsBySearch" />
       </div>
     </div>
   </div>
@@ -58,7 +55,7 @@
           .filter(exhibitor =>
             exhibitor.company_name.toLowerCase().includes(this.search.toLowerCase())
           )
-      },
+      }
     }
   }
 </script>
