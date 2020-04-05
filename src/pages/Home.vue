@@ -3,6 +3,7 @@
     <header class="nav-header">
       <div class="container">
           <input class="search-box" type="text" v-model="search" placeholder="Search Exhibitor..." />
+          <FilterList />
       </div>
     </header>
     <div class="content">
@@ -21,6 +22,8 @@
   import axios from 'axios';
   // import Exhibitor Card component
   import ExhibitorCard from '../components/ExhibitorCard.vue';
+  // import Filter List component
+  import FilterList from '../components/FilterList.vue';
   //store event_id and client_id params to a constant
   const event_id = "1b59351267938da712d19d57889c7f565cab96406e27a874607b90492a2845232f233a2b72bb4ae006a79b53f95aef054935c50b64d6a2a03cfe5cc75cbcd5cd";
   const client_id = "45426";
@@ -30,7 +33,8 @@
   export default {
     name: 'Home',
     components: {
-        ExhibitorCard
+        ExhibitorCard,
+        FilterList
     },
     data() {
       return {
@@ -43,11 +47,11 @@
       }
     },
 
-    //Fetch exhibitors with axios when the component is created
     created() {
+      //Fetch exhibitors with axios when the component is created
       axios.get(apiUrl)
         .then(response => {
-          // JSON responses are automatically parsed.
+          // JSON responses are automatically parsed with axios
           this.exhibitors = response.data.searchResult;
           this.filteredExhibitors = this.exhibitors.slice(0,12);
         })
