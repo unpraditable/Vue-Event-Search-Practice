@@ -13,8 +13,8 @@
                 <a v-if="exhibitor.booth" class="exhibitor-booth" href="#">{{exhibitor.booth}}</a>
                 <a v-if="!exhibitor.booth" class="exhibitor-booth no-booth" href="#">No Booth</a>
 
-                <a v-if="exhibitor.bookmark !=0" class="bookmarked">
-                    <span class="icon bookmark-icon active"></span>
+                <a v-if="exhibitor.bookmark !=0" class="bookmark active">
+                    <span class="icon bookmark-icon"></span>
                     Bookmarked
                 </a>
                 <a v-if="exhibitor.bookmark ===0" class="bookmark">
