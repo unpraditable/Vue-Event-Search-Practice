@@ -4,6 +4,12 @@
             <header class="exhibitor-card-header">
                 <div class="exhibitor-logo-container">
                     <img :src="exhibitor.logo" :alt="exhibitor.company_name" />
+                    <a v-if="exhibitor.bookmark !== 0" class="bookmark active" title="bookmarked">
+                        <span class="icon bookmark-icon"></span>
+                    </a>
+                    <a v-if="exhibitor.bookmark === 0" class="bookmark" title="bookmark">
+                        <span class="icon bookmark-icon"></span>
+                    </a>
                 </div>
             </header>
             <div class="exhibitor-name">
@@ -13,13 +19,13 @@
                 <a v-if="exhibitor.booth" class="exhibitor-booth" href="#">{{exhibitor.booth}}</a>
                 <a v-if="!exhibitor.booth" class="exhibitor-booth no-booth" href="#">No Booth</a>
 
-                <a v-if="exhibitor.bookmark !=0" class="bookmark active">
-                    <span class="icon bookmark-icon"></span>
-                    Bookmarked
+                <a v-if="exhibitor.messaged !== 0" class="message active" title="message">
+                    <span class="icon message-icon"></span>
+                    Messaged
                 </a>
-                <a v-if="exhibitor.bookmark ===0" class="bookmark">
-                    <span class="icon bookmark-icon"></span>
-                    Bookmark
+                <a v-if="exhibitor.messaged === 0" class="message" title="message">
+                    <span class="icon message-icon"></span>
+                    Message
                 </a>
             </div>
         </li>
