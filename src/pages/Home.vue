@@ -3,15 +3,22 @@
     <header class="nav-header">
       <div class="container">
           <input class="search-box" type="text" v-model="search" placeholder="Search Exhibitor..." />
-          <FilterList />
+          <ul class="list-unstyled filter-list">
+            <li v-for="filter in filterList" :key="filter.name">
+                <a v-bind:data-value="filter.value" v-on:click="filterIndex">{{filter.name}}</a>
+            </li>
+        </ul>
       </div>
     </header>
     <div class="content">
       <div class="container">
         <!-- If there is no search parameter, return whole exhibitors data -->
-          <ExhibitorCard v-if="!search" :exhibitors="exhibitors" />
-        <!-- If there is a search parameter, return filtered exhibitors data by search -->
+          <ExhibitorCard v-if="!isFiltered && !search" :exhibitors="exhibitors" />
+
+          <ExhibitorCard v-if="isFiltered && !search" :exhibitors="filteredExhibitors" />
+
           <ExhibitorCard v-if="search" :exhibitors="filteredExhibitorsBySearch" />
+
       </div>
     </div>
   </div>
@@ -22,8 +29,6 @@
   import axios from 'axios';
   // import Exhibitor Card component
   import ExhibitorCard from '../components/ExhibitorCard.vue';
-  // import Filter List component
-  import FilterList from '../components/FilterList.vue';
   //store event_id and client_id params to a constant
   const event_id = "1b59351267938da712d19d57889c7f565cab96406e27a874607b90492a2845232f233a2b72bb4ae006a79b53f95aef054935c50b64d6a2a03cfe5cc75cbcd5cd";
   const client_id = "45426";
@@ -33,8 +38,7 @@
   export default {
     name: 'Home',
     components: {
-        ExhibitorCard,
-        FilterList
+        ExhibitorCard
     },
     data() {
       return {
@@ -44,6 +48,18 @@
         filteredExhibitors : [],
         //search is a keyword that being used as a search parameters
         search: '',
+        //filterList is a list of filter components in navigation
+        filterList: [
+            {
+                name: "ALL",
+                value: "all"
+            },
+            {
+                name: "0-9",
+                value: "numbers"
+            }
+        ],
+        isFiltered: false
       }
     },
 
@@ -53,8 +69,13 @@
         .then(response => {
           // JSON responses are automatically parsed with axios
           this.exhibitors = response.data.searchResult;
-          this.filteredExhibitors = this.exhibitors.slice(0,12);
         })
+      
+      //Push all alphabets to filterList
+      let alphabets = "abcdefghijklmnopqrstuvwxyz";
+      for(let i=0;i<alphabets.length;i++){
+          this.filterList.push({"name": alphabets[i].toUpperCase(), "value": alphabets[i]});
+      }
     },
     mounted() {
       
@@ -62,10 +83,29 @@
     computed: {
       // filteredExhibitorBySearch() is a function to return a search result exhibitor by real time
       filteredExhibitorsBySearch() {
-        return this.exhibitors
+        let exhibitors = "";
+        if(this.isFiltered) {
+          exhibitors = this.filteredExhibitors
+        } else {
+          exhibitors = this.exhibitors;
+        }
+        return exhibitors
           .filter(exhibitor =>
             exhibitor.company_name.toLowerCase().includes(this.search.toLowerCase())
           )
+      }
+    },
+    methods: {
+      filterIndex: function (event) {
+        // `event` is the native DOM event
+        if(event.target.getAttribute("data-value") != "all") {
+          this.isFiltered = true;
+          this.filteredExhibitors = this.exhibitors
+          .filter(exhibitor =>
+            exhibitor.company_name[0].toLowerCase() == event.target.getAttribute("data-value"))
+        } else {
+          this.isFiltered = false;
+        }
       }
     }
   }
