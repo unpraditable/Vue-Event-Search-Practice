@@ -197,8 +197,16 @@ body {
 }
 
 .filter-list{
+    text-align: center;
     li{
+        cursor: pointer;
         display: inline-block;
-        margin-right: 10px;
+        a{
+            padding: 0 10px;
+            &.active{
+                background-color: $yellow;
+                font-weight: 700;
+            }
+        }
     }
 }

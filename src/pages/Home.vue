@@ -3,20 +3,26 @@
     <header class="nav-header">
       <div class="container">
           <input class="search-box" type="text" v-model="search" placeholder="Search Exhibitor..." />
-          <ul class="list-unstyled filter-list">
-            <li v-for="filter in filterList" :key="filter.name">
-                <a v-bind:data-value="filter.value" v-on:click="filterIndex">{{filter.name}}</a>
-            </li>
-        </ul>
+          
       </div>
     </header>
     <div class="content">
       <div class="container">
+        <ul class="list-unstyled filter-list">
+              <li>
+                <a class="active" data-value="all" v-on:click="filterIndex"> ALL</a>
+              </li>
+              <li v-for="filter in filterList" :key="filter.name">
+                  <a v-bind:data-value="filter.value" v-on:click="filterIndex">{{filter.name}}</a>
+              </li>
+          </ul>
         <!-- If there is no search parameter, return whole exhibitors data -->
           <ExhibitorCard v-if="!isFiltered && !search" :exhibitors="exhibitors" />
 
+          <!-- if there is a filter, return filter exhibitor data -->
           <ExhibitorCard v-if="isFiltered && !search" :exhibitors="filteredExhibitors" />
 
+          <!-- it there is a search parameter, return filtered exhibitor data by search -->
           <ExhibitorCard v-if="search" :exhibitors="filteredExhibitorsBySearch" />
 
       </div>
@@ -50,10 +56,6 @@
         search: '',
         //filterList is a list of filter components in navigation
         filterList: [
-            {
-                name: "ALL",
-                value: "all"
-            },
             {
                 name: "0-9",
                 value: "numbers"
@@ -100,12 +102,19 @@
       filterIndex: function (event) {
         // `event` is the native DOM event
         let value = event.target.getAttribute("data-value");
+
+        //find active elements of the filter element, then remove the active class
+        let activeEl = document.querySelector(".filter-list .active");
+        activeEl.classList.remove("active");
+
+        //find the clicked element, the add the active class
+        event.target.classList.add("active");
+
         //if the filter is all, return the filtered exhibitors list
         if(value != "all") {
           this.isFiltered = true;
           //if the first character is numerical, execute this function
           if(value == "numbers"){
-            alert(Number.isInteger(1));
             this.filteredExhibitors = this.exhibitors
             .filter(exhibitor =>
                Number.isInteger(
