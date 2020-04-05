@@ -96,14 +96,29 @@
       }
     },
     methods: {
+      //filterIndex is a function to filter exhibitor based on the first character of the items
       filterIndex: function (event) {
         // `event` is the native DOM event
-        if(event.target.getAttribute("data-value") != "all") {
+        let value = event.target.getAttribute("data-value");
+        //if the filter is all, return the filtered exhibitors list
+        if(value != "all") {
           this.isFiltered = true;
-          this.filteredExhibitors = this.exhibitors
-          .filter(exhibitor =>
-            exhibitor.company_name[0].toLowerCase() == event.target.getAttribute("data-value"))
+          //if the first character is numerical, execute this function
+          if(value == "numbers"){
+            alert(Number.isInteger(1));
+            this.filteredExhibitors = this.exhibitors
+            .filter(exhibitor =>
+               Number.isInteger(
+                 parseInt(exhibitor.company_name[0].toLowerCase()))
+              )
+          } else {
+            //if the first character is not numerical, execute this
+            this.filteredExhibitors = this.exhibitors
+            .filter(exhibitor =>
+              exhibitor.company_name[0].toLowerCase() == value)
+            }
         } else {
+          //return all exhibitors if all filter is activated
           this.isFiltered = false;
         }
       }
