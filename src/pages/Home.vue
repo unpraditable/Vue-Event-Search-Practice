@@ -25,6 +25,10 @@
           <!-- it there is a search parameter, return filtered exhibitor data by search -->
           <ExhibitorCard v-if="search" :exhibitors="filteredExhibitorsBySearch" />
 
+          <p v-if="(search && filteredExhibitorsBySearch.length ===0) || (isFiltered && filteredExhibitors.length ===0)">
+            No Exhibitor Found!
+          </p>
+
       </div>
     </div>
   </div>
