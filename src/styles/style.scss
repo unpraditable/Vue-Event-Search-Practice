@@ -151,7 +151,7 @@ body {
             display: flex;
             .bookmark-icon{
                 display: inline-block;
-                background: url(/icons/bookmark.svg);
+                background: url(./assets/icons/bookmark.svg);
                 background-repeat: no-repeat;
                 width: 15px;
                 height: 15px;
@@ -163,7 +163,7 @@ body {
                 color: $orange;
                 .bookmark-icon{
                     display: inline-block;
-                    background: url(/icons/bookmark-active.svg);
+                    background: url(./assets/icons/bookmark-active.svg);
                     background-repeat: no-repeat;
                     width: 15px;
                     height: 15px;
@@ -207,7 +207,7 @@ body {
             display: flex;
             .message-icon{
                 display: inline-block;
-                background: url(/icons/mail.svg);
+                background: url(./assets/icons/mail.svg);
                 background-repeat: no-repeat;
                 width: 20px;
                 height: 20px;
@@ -218,7 +218,7 @@ body {
             &.active{
                 .message-icon{
                     display: inline-block;
-                    background: url(/icons/mail.svg);
+                    background: url(./assets/icons/mail.svg);
                     background-repeat: no-repeat;
                     width: 20px;
                     height: 20px;
