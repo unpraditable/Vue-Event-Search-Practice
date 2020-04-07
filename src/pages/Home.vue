@@ -77,8 +77,13 @@
         }
       })
       .then(response => {
-        // JSON responses are automatically parsed with axios
-        this.exhibitors = response.data.searchResult;
+        if (localStorage.getItem('exhibitors')) {
+          //if there is an item in localstorage, then set exhibitor to localstorage
+          this.exhibitors = JSON.parse(localStorage.getItem('exhibitors'))
+        } else {
+          //if there is no item in localstorage, set exhibitors to the response of the fetch request
+          this.exhibitors = response.data.searchResult;
+        };
       })
       
       //Push all alphabets to filterList
@@ -86,9 +91,6 @@
       for(let i=0;i<alphabets.length;i++){
           this.filterList.push({"name": alphabets[i].toUpperCase(), "value": alphabets[i]});
       }
-      
-    },
-    mounted() {
       
     },
     computed: {
@@ -105,6 +107,15 @@
             exhibitor.company_name.toLowerCase().includes(this.search.toLowerCase())
           )
       }
+    },
+    watch: {
+      exhibitors: {
+        handler() {
+          //everytime exhibitors is changed from any triggers, like bookmark button or message button, update the local storage too 
+          localStorage.setItem('exhibitors', JSON.stringify(this.exhibitors));
+        },
+        deep: true,
+      },
     },
     methods: {
       //filterIndex is a function to filter exhibitor based on the first character of the items
