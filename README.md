@@ -1,5 +1,5 @@
 # Vue-Event-Search-Practice
-The practice application to make search feature in vue using Vue JS using a search API from Jublia. 
+The practice application to make search feature in vue using Vue JS using a search API from Jublia. Live version of this app: https://unpraditable.github.io/Vue-Event-Search-Practice/
 
 ## Purpose of the application
 The purpose of this application is to browse all the exhibitors (identified by exhibitors ID) in a certain event (identified by event_id) which the event is hosted by a client (identified by client_id). Also, to bookmark the company or to message or read a message from a company, so the client could communicate with the company and can decide whether the client will invite the company again for the next event or not, or other purposes.
