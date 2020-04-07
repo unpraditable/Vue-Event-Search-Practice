@@ -6,13 +6,7 @@
                 <div class="exhibitor-logo-container">
                     <img :src="exhibitor.logo" :alt="exhibitor.company_name" />
 
-                    <!-- Conditional Render Bookmark based on if bookmark have value in exhibitor or not -->
-                    <a v-if="exhibitor.bookmark !== 0" class="bookmark active" title="bookmarked">
-                        <span class="icon bookmark-icon"></span>
-                    </a>
-                    <a v-if="exhibitor.bookmark === 0" class="bookmark" title="bookmark">
-                        <span class="icon bookmark-icon"></span>
-                    </a>
+                    
                 </div>
             </header>
             <div class="exhibitor-name">
@@ -24,14 +18,29 @@
 
                 <a v-if="!exhibitor.booth" class="exhibitor-booth no-booth" href="#">No Booth</a>
 
+                
+            </div>
+            <div class="exhibitor-button-area">
+                
+
                 <!-- Conditional Render Message with notif or without notide based on value of messaged in exhibitor -->
                 <a v-if="exhibitor.messaged !== 0" class="message active" title="message">
-                    <span class="icon message-icon"></span>
-                    Messaged
+                    <div class="icon message-icon"></div>
+                    <p>Messaged</p>
                 </a>
                 <a v-if="exhibitor.messaged === 0" class="message" title="message">
-                    <span class="icon message-icon"></span>
-                    Message
+                    <div class="icon message-icon"></div>
+                    <p>Message</p>
+                </a>
+
+                <!-- Conditional Render Bookmark based on if bookmark have value in exhibitor or not -->
+                <a v-if="exhibitor.bookmark !== 0" class="bookmark active" title="bookmarked">
+                    <div class="icon bookmark-icon"></div>
+                    <p>Bookmark</p>
+                </a>
+                <a v-if="exhibitor.bookmark === 0" class="bookmark" title="bookmark">
+                    <div class="icon bookmark-icon"></div>
+                    <p>Bookmark</p>
                 </a>
             </div>
         </li>

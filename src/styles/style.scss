@@ -137,42 +137,7 @@ body {
                 object-fit: contain;
             }
         }
-        .bookmark{
-            background: white;
-            box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.1);
-            padding: 10px;
-            border-radius: 100%;
-            position: absolute;
-            right:0;
-            top: 0;
-            margin-left: auto;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            .bookmark-icon{
-                display: inline-block;
-                background: url(./assets/icons/bookmark.svg);
-                background-repeat: no-repeat;
-                width: 15px;
-                height: 15px;
-                background-size: contain;
-                content: "";
-                // margin-right: 5px;
-            }
-            &.active{
-                color: $orange;
-                .bookmark-icon{
-                    display: inline-block;
-                    background: url(./assets/icons/bookmark-active.svg);
-                    background-repeat: no-repeat;
-                    width: 15px;
-                    height: 15px;
-                    background-size: contain;
-                    content: "";
-                    // margin-right: 5px;
-                }
-            }
-        }
+        
     }
     .exhibitor-name {
         height: 52px;
@@ -198,13 +163,23 @@ body {
                 background: $gray;
             }
         }
-        .message{
+    }
+    .exhibitor-button-area{
+        margin-top: 15px;
+        display: flex;
+        a{
             background: white;
             padding: 10px;            
-            margin-left: auto;
             cursor: pointer;
             font-size: 14px;
-            display: flex;
+            display: block;
+            text-align: center;
+        }
+        p{
+            margin: 0;
+        }
+        .message{
+            
             .message-icon{
                 display: inline-block;
                 background: url(./assets/icons/mail.svg);
@@ -213,7 +188,7 @@ body {
                 height: 20px;
                 background-size: contain;
                 content: "";
-                margin-right: 5px;
+                // margin-right: 5px;
             }
             &.active{
                 .message-icon{
@@ -237,6 +212,32 @@ body {
                         background-color: red;
                         border-radius: 100%;
                     }
+                }
+            }
+        }
+        .bookmark{
+            margin-left: auto;
+            .bookmark-icon{
+                display: inline-block;
+                background: url(./assets/icons/bookmark.svg);
+                background-repeat: no-repeat;
+                width: 20px;
+                height: 20px;
+                background-size: contain;
+                content: "";
+                // margin-right: 5px;
+            }
+            &.active{
+                color: $orange;
+                .bookmark-icon{
+                    display: inline-block;
+                    background: url(./assets/icons/bookmark-active.svg);
+                    background-repeat: no-repeat;
+                    width: 20px;
+                    height: 20px;
+                    background-size: contain;
+                    content: "";
+                    // margin-right: 5px;
                 }
             }
         }
