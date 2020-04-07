@@ -67,24 +67,24 @@
     },
 
     created() {
-      //Fetch exhibitors with axios when the component is created
-      axios({
-        method: 'get',
-        url: apiUrl,
-        params: {
-          event_id: event_id,
-          client_id: client_id
-        }
-      })
-      .then(response => {
-        if (localStorage.getItem('exhibitors')) {
+
+      if (localStorage.getItem('exhibitors')) {
           //if there is an item in localstorage, then set exhibitor to localstorage
           this.exhibitors = JSON.parse(localStorage.getItem('exhibitors'))
         } else {
-          //if there is no item in localstorage, set exhibitors to the response of the fetch request
-          this.exhibitors = response.data.searchResult;
-        };
-      })
+          //if there is no item in localstorage, fetch the exhibitors from the API
+          axios({
+            method: 'get',
+            url: apiUrl,
+            params: {
+              event_id: event_id,
+              client_id: client_id
+            }
+          })
+          .then(response => {
+            this.exhibitors = response.data.searchResult;
+          })
+      };
       
       //Push all alphabets to filterList
       let alphabets = "abcdefghijklmnopqrstuvwxyz";
