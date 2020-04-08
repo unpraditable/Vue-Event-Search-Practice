@@ -233,26 +233,13 @@ body {
         &.active {
             .message-icon {
                 display: inline-block;
-                background: url(./assets/icons/mail.svg);
+                background: url(./assets/icons/mail-active.svg);
                 background-repeat: no-repeat;
                 width: 20px;
                 height: 20px;
                 background-size: contain;
                 content: "";
-                margin-right: 5px;
                 position: relative;
-
-                &:after {
-                    content: "";
-                    display: inline-block;
-                    position: absolute;
-                    top: -2px;
-                    right: -5px;
-                    width: 10px;
-                    height: 10px;
-                    background-color: red;
-                    border-radius: 100%;
-                }
             }
         }
     }
