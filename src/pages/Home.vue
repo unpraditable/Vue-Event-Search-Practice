@@ -28,9 +28,6 @@
           <p v-if="(search && filteredExhibitorsBySearch.length ===0) || (isFiltered && filteredExhibitors.length ===0)">
             No Exhibitor Found!
           </p>
-
-          <Modal v-if="showModal"/>
-
       </div>
     </div>
   </div>

@@ -326,6 +326,9 @@ body {
     section{
         margin: 10px 0;
         border-bottom: 1px solid lighten($text-color, 70%);
+        &:last-child{
+            border-bottom: none;
+        }
     }
     margin: 0 0 20px;
     padding: 15px;
@@ -371,4 +374,46 @@ body {
 .modal-leave-active .modal-container {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
+}
+
+#message-modal{
+    .modal-container{
+        min-height: 70vh;
+        background-color: white;
+    }
+    #message-form{
+        label, input,textarea{
+            display: block;
+        }
+        label{
+            margin-bottom: 5px;
+        }
+        input,textarea{
+            width: 100%;
+            padding: 5px;
+            border: 0;
+            border-bottom: 1px solid $text-color;
+        }
+        .submit-button{
+            background-color: $yellow;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 10px;
+            border-radius: 2px;
+            display: inline-block;
+            width: auto;
+            margin-right: 10px;
+            border: none;
+        }
+        
+    }
+    .back-button{
+        background-color: darken($gray, 10%);
+        font-size: 16px;
+        font-weight: 700;
+        padding: 10px;
+        border-radius: 2px;
+        box-shadow: none;
+        border: none;
+    }
 }

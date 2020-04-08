@@ -19,11 +19,11 @@
                             <h4>{{exhibitor.company_name}}</h4>
                             <div class="exhibitor-button-area">
                                 <!-- Conditional Render Message with notif or without notide based on value of messaged in exhibitor -->
-                                <a v-if="exhibitor.messaged !== 0" class="message active" title="message" @click="message(exhibitor.id_exhibitor)">
+                                <a v-if="exhibitor.messaged !== 0" class="message active" title="message" @click="$emit('openMessage', exhibitor.id_exhibitor)">
                                     <div class="icon message-icon"></div>
                                     <p>Messaged</p>
                                 </a>
-                                <a v-if="exhibitor.messaged === 0" class="message" title="message" @click="message(exhibitor.id_exhibitor)">
+                                <a v-if="exhibitor.messaged === 0" class="message" title="message" @click="$emit('openMessage', exhibitor.id_exhibitor)">
                                     <div class="icon message-icon"></div>
                                     <p>Message</p>
                                 </a>
@@ -63,6 +63,6 @@
 
 export default {
   name: 'ExhibitorModal',
-  props: ["showModal", "exhibitor"]
+  props: ["showExhibitorModal", "exhibitor"]
 }
 </script>
