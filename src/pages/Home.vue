@@ -29,6 +29,8 @@
             No Exhibitor Found!
           </p>
 
+          <Modal v-if="showModal"/>
+
       </div>
     </div>
   </div>
@@ -45,7 +47,7 @@
   export default {
     name: 'Home',
     components: {
-        ExhibitorCard
+        ExhibitorCard,
     },
     data() {
       return {
@@ -62,7 +64,8 @@
                 value: "numbers"
             }
         ],
-        isFiltered: false
+        isFiltered: false,
+
       }
     },
 
