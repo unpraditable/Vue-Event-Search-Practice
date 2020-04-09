@@ -1,6 +1,4 @@
-$green : #42b983;
 $text-color: #222222;
-$purple : rgb(42, 9, 46);
 $yellow: #ffde00;
 $orange: rgb(238, 138, 48);
 $gray : #f5f5f5;
@@ -378,7 +376,6 @@ body {
 
 #message-modal{
     .modal-container{
-        min-height: 70vh;
         background-color: white;
     }
     #message-form{
@@ -395,6 +392,7 @@ body {
             border-bottom: 1px solid $text-color;
         }
         .submit-button{
+            cursor: pointer;
             background-color: $yellow;
             font-size: 16px;
             font-weight: 700;
@@ -408,6 +406,7 @@ body {
         
     }
     .back-button{
+        cursor: pointer;
         background-color: darken($gray, 10%);
         font-size: 16px;
         font-weight: 700;
@@ -415,5 +414,40 @@ body {
         border-radius: 2px;
         box-shadow: none;
         border: none;
+    }
+}
+
+.bookmark-button{
+    cursor: pointer;
+    background: lighten($gray, 10%);
+    font-size: 16px;
+    font-weight: 700;
+    padding: 10px;
+    border-radius: 2px;
+    box-shadow: none;
+    border: none;
+    display: flex;
+    &:before{
+        display: inline-block;
+        background: url(./assets/icons/bookmark.svg);
+        background-repeat: no-repeat;
+        width: 16px;
+        height: 16px;
+        background-size: contain;
+        content: "";
+        margin-right: 5px;
+    }
+
+    &.active{
+        &:before{
+            display: inline-block;
+            background: url(./assets/icons/bookmark-active.svg);
+            background-repeat: no-repeat;
+            width: 16px;
+            height: 16px;
+            background-size: contain;
+            content: "";
+            margin-right: 5px;
+        }
     }
 }

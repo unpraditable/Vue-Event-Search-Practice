@@ -16,16 +16,26 @@
                   <a v-bind:data-value="filter.value" v-on:click="filterIndex">{{filter.name}}</a>
               </li>
           </ul>
+          <button class="bookmark-button active" @click="bookmarkPage" v-if="isBookmarkPage">
+            Bookmark
+          </button>
+
+          <button class="bookmark-button" @click="bookmarkPage" v-if="!isBookmarkPage">
+            Bookmark
+          </button>
         <!-- If there is no search parameter, return whole exhibitors data -->
-          <ExhibitorCard v-if="!isFiltered && !search" :exhibitors="exhibitors" />
+          <ExhibitorCard v-if="!isFiltered && !search && !isBookmarkPage" :exhibitors="exhibitors" />
 
           <!-- if there is a filter, return filter exhibitor data -->
-          <ExhibitorCard v-if="isFiltered && !search" :exhibitors="filteredExhibitors" />
+          <ExhibitorCard v-if="isFiltered && !search && !isBookmarkPage" :exhibitors="filteredExhibitors" />
 
           <!-- it there is a search parameter, return filtered exhibitor data by search -->
-          <ExhibitorCard v-if="search" :exhibitors="filteredExhibitorsBySearch" />
+          <ExhibitorCard v-if="search && !isBookmarkPage" :exhibitors="filteredExhibitorsBySearch" />
 
-          <p v-if="(search && filteredExhibitorsBySearch.length ===0) || (isFiltered && filteredExhibitors.length ===0)">
+          <!-- it there is a search parameter, return filtered exhibitor data by search -->
+          <ExhibitorCard v-if="isBookmarkPage" :exhibitors="bookmarkedExhibitors" />
+
+          <p v-if="(search && filteredExhibitorsBySearch.length ===0) || (isFiltered && filteredExhibitors.length ===0) || (isBookmarkPage && bookmarkedExhibitors.length === 0)">
             No Exhibitor Found!
           </p>
       </div>
@@ -62,6 +72,7 @@
             }
         ],
         isFiltered: false,
+        isBookmarkPage : false,
 
       }
     },
@@ -100,12 +111,29 @@
         if(this.isFiltered) {
           exhibitors = this.filteredExhibitors
         } else {
-          exhibitors = this.exhibitors;
+          exhibitors = this.exhibitors
         }
         return exhibitors
           .filter(exhibitor =>
             exhibitor.company_name.toLowerCase().includes(this.search.toLowerCase())
           )
+      },
+      
+      bookmarkedExhibitors() {
+        let exhibitors = "";
+        if(this.isFiltered) {
+          exhibitors = this.filteredExhibitors
+        }
+        if(this.search){
+          exhibitors = this.filteredExhibitorsBySearch
+        }
+        if(!this.search && !this.isFiltered) {
+          exhibitors = this.exhibitors
+        }
+
+        return exhibitors
+          .filter(exhibitor =>
+            exhibitor.bookmark != 0)
       }
     },
     watch: {
@@ -151,6 +179,15 @@
           this.isFiltered = false;
         }
       },
+
+      bookmarkPage : function() {
+        if(this.isBookmarkPage) {
+          this.isBookmarkPage = false
+        } else {
+          this.isBookmarkPage = true
+        }
+      }
+
       
     }
   }
